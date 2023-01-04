@@ -55,11 +55,29 @@ public:
 
     Product &operator=(const Product &x)
     {
+        // we should subtract the ammount in this from total
+        int sum = 0;
+        for (int i = 0; i < amount.size(); i++)
+        {
+            sum = sum + amount[i];
+        }
+        total = total - sum;
+
         name = x.name;
         destinations = x.destinations;
         amount = x.amount;
-        counter++;
-        id = counter;
+        //         counter++;
+        //         id = counter;
+
+        // we should not do anything for ids
+
+        // we should add the amount from x
+        sum = 0;
+        for (int i = 0; i < x.amount.size(); i++)
+        {
+            sum = sum + x.amount[i];
+        }
+        total = total + sum;
 
         return *this;
     }
