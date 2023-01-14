@@ -2,3 +2,9 @@
 .vscode
 *.exe
 Test2/prvYtest/testFile.cpp
+*.cbp
+*.o
+*.depend
+*.layout
+task1/Trainging1/main.cpp
+task1/Trainging1/lib.h
