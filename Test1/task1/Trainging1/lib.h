@@ -16,7 +16,7 @@ private:
     static int counter;
     vector <string> destinations;
     vector <int> amount;
-
+    static int total;
 
 public:
     Product(string n=" ")
@@ -41,6 +41,10 @@ public:
         {
             amount = x.amount;
         }
+        for (int i = 0; i < x.amount.size(); i++)
+        {
+            total += x.amount[i];
+        }
         counter++;
         id=counter;
     }
@@ -48,11 +52,18 @@ public:
     // assignment
     Product &operator =(const Product &other)
     {
+        int sum;
+        for(int i=0; i <amount.size();i++){
+            total-=amount[i];
+        }
         name = other.name;
 
         destinations = other.destinations;
 
         amount = other.amount;
+        for(int i=0;i<other.amount.size();i++){
+            total+=other.amount[i];
+        }
 
         return *this;
     }
@@ -96,8 +107,10 @@ public:
             destinations.push_back(dest);
             amount.push_back(amou);
         }
+        total += amou;
     }
 
+//deleteDestination method
     void deleteDestination(string dest)
     {
         bool found = false;
@@ -109,10 +122,10 @@ public:
 
                 destinations.erase(destinations.begin()+i);
                 amount.erase(amount.begin()+i);
+                total-=amount[i];
                 found=true;
             }
         }
-
         if(!found)
         {
             throw logic_error (" Destination not found");
@@ -175,14 +188,24 @@ public:
                 index=i;
             }
         }
-        cout<< "Total: "<< total << " average: "<< total/x.amount.size()<< " max : " << maxAmount <<" to "<< x.destinations[index]  << endl;
+        cout<< "Total: "<< total << " average: "<< (double)total/x.amount.size()<< " max : " << maxAmount <<" to "<< x.destinations[index]  << endl;
         return out;
 
     }
+
+    // total amount
+
+    static int totalAmount()  {
+
+        return total;
+
+    }
+
 
 
 };
 
 int Product::counter=0;
+int Product::total=0;
 
 #endif
